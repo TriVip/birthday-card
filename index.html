@@ -10,17 +10,25 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
-            width: 100vw;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: url('ani.jpg');
-            background-size: contain; /* Change to contain */
-            background-position: center;
-            background-repeat: no-repeat;
             font-family: Arial, sans-serif;
             overflow: hidden;
             position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('ani.jpg') center/cover no-repeat;
+            filter: brightness(0.7);
+            z-index: -1;
         }
 
         html {
@@ -29,7 +37,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background: #666;
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .hearts {
@@ -85,15 +93,16 @@
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             text-align: center;
-            max-width: 400px;
-            position: relative;
+            width: 85%;
+            max-width: 320px;
+            margin: 0 auto;
             z-index: 1;
-            animation: float 3s ease-in-out infinite;
+            position: relative; /* Add this */
         }
 
         @keyframes float {
@@ -112,14 +121,15 @@
 
         h1 {
             color: #ff4b6e;
-            margin-bottom: 1rem;
-            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
         }
 
         p {
             color: #666;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
         }
 
         .card-heart {
@@ -143,48 +153,15 @@
 
         .balloon {
             position: absolute;
-            font-size: 2rem;
-            animation: balloonFloat 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-            opacity: 0.9;
-            will-change: transform;
-            backface-visibility: hidden;
-            transform: translateZ(0);
-        }
-
-        .balloon:nth-child(1) {
-            top: -50px;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .balloon:nth-child(2) {
-            top: -30px;
-            right: 15%;
-            animation-delay: 0.5s;
-        }
-
-        .balloon:nth-child(3) {
-            bottom: -50px;
-            left: 20%;
-            animation-delay: 1s;
-        }
-
-        .balloon:nth-child(4) {
-            bottom: -30px;
-            right: 25%;
-            animation-delay: 1.5s;
+            font-size: 1.5rem;
+            animation: balloonFloat 4s ease-in-out infinite;
+            z-index: 2;
+            transition: all 0.3s ease;
         }
 
         @keyframes balloonFloat {
-
-            0%,
-            100% {
-                transform: translate3d(0, 0, 0) rotate(0deg);
-            }
-
-            50% {
-                transform: translate3d(0, -20px, 0) rotate(10deg);
-            }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .background-container {
@@ -195,16 +172,6 @@
             height: 100%;
             z-index: -1;
             overflow: hidden;
-        }
-
-        .background-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            max-width: 1024px; /* Limit max width */
-            max-height: 1024px; /* Limit max height */
-            margin: auto;
-            display: block;
         }
     </style>
 </head>
@@ -251,12 +218,34 @@
         <p>
             Gửi vợ yêu của anh,<br>
             Chúc em một sinh nhật thật hạnh phúc!<br>
-            Mong rằng năm mới của em sẽ tràn ngập niềm vui,<br>
+            Mong rằng năm mới của em tràn ngập niềm vui,<br>
             sức khỏe và những điều tuyệt vời nhất.<br>
             Anh yêu em rất nhiều!
         </p>
         <div class="card-heart">❤️</div>
     </div>
+
+    <script>
+        function randomizeBalloons() {
+            const balloons = document.querySelectorAll('.balloon');
+            
+            balloons.forEach(balloon => {
+                // Random position
+                balloon.style.left = Math.random() * 80 + 10 + '%';
+                balloon.style.top = -(Math.random() * 30 + 10) + 'px';
+                
+                // Random animation delay
+                balloon.style.animationDelay = Math.random() * 2 + 's';
+                
+                // Random size variation
+                const size = 1.2 + Math.random() * 0.6;
+                balloon.style.fontSize = size + 'rem';
+            });
+        }
+
+        // Run when page loads
+        window.addEventListener('load', randomizeBalloons);
+    </script>
 </body>
 
 </html>
