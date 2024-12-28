@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Sinh Nhật Vợ</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('ani.jpg');
+            background-size: contain; /* Change to contain */
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #666;
+        }
+
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            will-change: transform;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+        }
+
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #fff;
+            transform: rotate(45deg);
+            animation: heartFall linear infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: inherit;
+        }
+
+        .heart::before {
+            left: -10px;
+        }
+
+        .heart::after {
+            top: -10px;
+        }
+
+        @keyframes heartFall {
+            0% {
+                transform: translateY(-100vh) rotate(45deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(100vh) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            position: relative;
+            z-index: 1;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        h1 {
+            color: #ff4b6e;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-heart {
+            color: #ff4b6e;
+            font-size: 2rem;
+            animation: beat 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            transform-origin: center;
+        }
+
+        @keyframes beat {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .balloon {
+            position: absolute;
+            font-size: 2rem;
+            animation: balloonFloat 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            opacity: 0.9;
+            will-change: transform;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+        }
+
+        .balloon:nth-child(1) {
+            top: -50px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .balloon:nth-child(2) {
+            top: -30px;
+            right: 15%;
+            animation-delay: 0.5s;
+        }
+
+        .balloon:nth-child(3) {
+            bottom: -50px;
+            left: 20%;
+            animation-delay: 1s;
+        }
+
+        .balloon:nth-child(4) {
+            bottom: -30px;
+            right: 25%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes balloonFloat {
+
+            0%,
+            100% {
+                transform: translate3d(0, 0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate3d(0, -20px, 0) rotate(10deg);
+            }
+        }
+
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-width: 1024px; /* Limit max width */
+            max-height: 1024px; /* Limit max height */
+            margin: auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hearts">
+        <script>
+            // Tạo các trái tim rơi
+            function createHearts() {
+                const heartsContainer = document.querySelector('.hearts');
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+
+                // Random vị trí xuất hiện
+                heart.style.left = Math.random() * 100 + 'vw';
+                // Random màu sắc
+                heart.style.background = `rgba(255,${Math.random() * 100 + 155},${Math.random() * 100 + 155},0.7)`;
+                // Random kích thước
+                const size = Math.random() * 15 + 10;
+                heart.style.width = size + 'px';
+                heart.style.height = size + 'px';
+                // Random thời gian rơi
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+
+                heartsContainer.appendChild(heart);
+
+                // Xóa trái tim sau khi animation kết thúc
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }
+
+            // Tạo trái tim mới mỗi 300ms
+            setInterval(createHearts, 300);
+        </script>
+    </div>
+
+    <div class="card">
+        <span class="balloon">🎈</span>
+        <span class="balloon">🎈</span>
+        <span class="balloon">🎈</span>
+        <span class="balloon">🎈</span>
+        <h1>Chúc Mừng Sinh Nhật</h1>
+        <p>
+            Gửi vợ yêu của anh,<br>
+            Chúc em một sinh nhật thật hạnh phúc!<br>
+            Mong rằng năm mới của em sẽ tràn ngập niềm vui,<br>
+            sức khỏe và những điều tuyệt vời nhất.<br>
+            Anh yêu em rất nhiều!
+        </p>
+        <div class="card-heart">❤️</div>
+    </div>
+</body>
+
+</html>
